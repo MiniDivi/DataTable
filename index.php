@@ -1,19 +1,15 @@
 <?php
             include "pages/queries.php";
             $requestedMethod = $_SERVER['REQUEST_METHOD']; //ottengo il metodo richiesto.
-            $page = isset($_POST['start']) ? $_POST['start'] : 0;
-            $size = isset($_POST['length']) ? $_POST['length'] : 20;
+            $start = isset($_POST['start']) ? $_POST['start'] : 0;
+            $lenght = isset($_POST['length']) ? $_POST['length'] : 20;
             $order = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : "asc";
-            // $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : null;
             $totalElements = totalElements();
             $datas = array();
 
             if ($requestedMethod === "POST") {
-                    // if($search == null) {
-                        $datas['data'] = postRequest($page*$size, $size, $order);
-                    // } else {
-                        // $datas['data'] = postRequestSearch($page*$size, $size, $order, $search);
-                    // }
+
+                    $datas['data'] = postRequest($start*$lenght, $lenght, $order);
                     $datas['recordsFiltered']=$totalElements;
                     $datas['recordsTotal']=$totalElements;
                     echo json_encode($datas);
@@ -26,4 +22,3 @@
                     echo json_encode($datas);
 
                 }
-?>

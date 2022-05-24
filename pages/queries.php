@@ -1,7 +1,7 @@
 <?php
 
 
-function postRequest($first, $lenght, $order){
+function postRequest($start, $lenght, $order){
     require('connection.php');
     $query = "SELECT * FROM employees ORDER BY id $order LIMIT $first, $lenght";
     $result = $mysqli->query($query);
